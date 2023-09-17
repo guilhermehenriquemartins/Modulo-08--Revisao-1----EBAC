@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculador de Média</title>
+  <link rel="shortcut icon" href="imagens/lousa.png" type="image/x-icon">
+  <link rel="stylesheet" href="first.css">
+</head>
+<body>
+    <header>
+      <img src="imagens/lousa.png" alt="Calculadora de Médias">
+      <h1>Calculadora de médias</h1>
+    </header>
+    <main>
+      <form action="cadastro.php" method="post" autocomplete="off" id="formulario">
+        <input type="text" name="NomeAtividade" id="nome-atividade" placeholder="Nome da Atividade">
+        <input type="number" name="NotaAtividade" id="nota-atividade" placeholder="Nota da Atividade">
+        <button type="submit">Adicionar+</button>
+      </form>
+      <table cellspacing="0">
+        <thead>
+          <tr>
+            <th>Nome da atividade</th>
+            <th>Nota</th>
+            <th>Aprovado?</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>Nota média</td>
+            <td>---</td>
+            <td><span class="resultado">Aprovado</span></td>
+          </tr>
+        </tfoot>
+      </table>
+    </main>
+    <script src="programacao.js"></script>
+</body>
+</html>
