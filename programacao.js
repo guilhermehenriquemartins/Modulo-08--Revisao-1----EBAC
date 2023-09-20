@@ -1,31 +1,38 @@
 const form = document.getElementById('formulario')
 let linhas = ''
-const feliz = '<img src="imagens/feliz.png" alt="feliz">'
-const triste = '<img src="imagens/triste.png" alt="triste">'
-const atividades = []
+let feliz = '<img src="imagens/feliz.png" alt="Aprovado">'
+let triste = '<img src="imagens/triste.png" alt="Reprovado">'
 const notas = []
+const atividades = []
+const Aprovado = '<span class = "resultado aprovado">Aprovado</span>'
+const Reprovado = '<span class="resultado reprovado">Reprovado</span>'
+const NotaMinima = Number(prompt('Digite a nota mínima: '))
 
 form.addEventListener('submit', function(e){
   e.preventDefault();
   adicionaLinha();
   atualizaTabela();
-  recebeMediaFinal();
+  AtualizaMedia();
 })
 
 function adicionaLinha() {
   const NomeAtividade = document.getElementById('nome-atividade')
   const NotaAtividade = document.getElementById('nota-atividade')
 
-  atividades.push(NomeAtividade.value)
-  notas.push(Number(NotaAtividade.value))
+  if(atividades.includes(NomeAtividade.value)) {
+    alert(`Atividade ${NomeAtividade.value} já foi inserida!`)
+  } else {
+    notas.push(Number(NotaAtividade.value))
+    atividades.push(NomeAtividade.value)
 
-  let linha = `<tr>`
-  linha += `<td>${NomeAtividade.value}</td>`
-  linha += `<td>${NotaAtividade.value}</td>`
-  linha += `<td>${NotaAtividade.value >= 7 ? feliz : triste}</td>`
-  linha += `</tr>`
+    let linha = `<tr>`
+    linha += `<td>${NomeAtividade.value}</td>`
+    linha += `<td>${NotaAtividade.value}</td>`
+    linha += `<td>${NotaAtividade.value >= NotaMinima ? feliz : triste}</td>`
+    linha += `</tr>`
 
-  linhas += linha
+    linhas += linha
+  }
 
   NomeAtividade.value = ''
   NotaAtividade.value = ''
@@ -36,18 +43,16 @@ function atualizaTabela() {
   CorpoTabela.innerHTML = linhas
 }
 
-
-function calculaMediaFinal() {
-  let somaDasNotas = 0
-
-  for (let i = 0; i < notas.length; i++) {
-    somaDasNotas += notas[i];
+function CalculaMedia() {
+  let SomaMedia = 0
+  for (let i = 0; i < notas.length; i++ ) {
+    SomaMedia += notas[i]
   }
-  return somaDasNotas / notas.length;
+  return SomaMedia / notas.length
 }
 
-function recebeMediaFinal() {
-  const Media = calculaMediaFinal()
-  document.getElementById('nota-media').innerHTML = Media
-  document.getElementById('resultado-media').innerHTML = Media >= 7 ? 'Aprovado' : 'Reprovado'
+function AtualizaMedia() {
+  const RecebeMedia = CalculaMedia()
+  document.getElementById('nota-media').innerHTML = RecebeMedia
+  document.getElementById('resultado-media').innerHTML = RecebeMedia >= NotaMinima ? Aprovado : Reprovado
 }
